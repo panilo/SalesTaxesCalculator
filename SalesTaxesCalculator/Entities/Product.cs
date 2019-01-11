@@ -12,19 +12,29 @@ namespace SalesTaxesCalculator.Entities
         public bool Imported { get; private set; }
         public ProductCategory Category { get; private set; }
         public decimal Price { get; private set; }
-
-        private decimal _priceWithTaxes = -1;
+        
         public decimal PriceWithTaxes {
-            get {
-                if (_priceWithTaxes < 0)
-                    _priceWithTaxes = this.CalcPriceWithTaxes();
-                return _priceWithTaxes;
+            get
+            {
+                return this.Price + this.SaleTax;
+            }
+        }
+
+        private decimal _saleTax = -1;
+        public decimal SaleTax
+        {
+            get
+            {
+                if (_saleTax < 0)
+                    _saleTax = this.CalcSaleTax();
+                return _saleTax;
             }
         }
 
         private decimal _taxRatio = -1;
         public decimal TaxRatio {
-            get {
+            get
+            {
                 if (_taxRatio < 0)
                     _taxRatio = this.CalculateTaxRatio();
                 return _taxRatio;
@@ -39,17 +49,17 @@ namespace SalesTaxesCalculator.Entities
             this.Imported = imported;
         }
 
-        private decimal CalcPriceWithTaxes()
+        private decimal CalcSaleTax()
         {
             if (this.TaxRatio > 0)
             {
                 decimal taxes = (this.Price * this.TaxRatio) / 100;
                 taxes = Math.Ceiling(taxes / 0.05m) * 0.05m;
-                return this.Price + taxes;
+                return taxes;
             }
             else
             {
-                return this.Price;
+                return 0;
             }
         }
 
