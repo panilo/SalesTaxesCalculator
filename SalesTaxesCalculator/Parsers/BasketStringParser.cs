@@ -19,7 +19,7 @@ namespace SalesTaxesCalculator.Parsers
         //Get a basket element for each row
         //If an element couldn't be parsed then raise an exception or alter user in some fashion
 
-        private StringBuilder _unparsed;
+        private StringBuilder _unparsed;        
 
         public BasketStringParser()
         {
@@ -69,7 +69,7 @@ namespace SalesTaxesCalculator.Parsers
                 }
             }
 
-            return toReturn;
+            return toReturn;            
         }        
     }
 }

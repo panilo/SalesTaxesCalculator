@@ -17,5 +17,18 @@ namespace SalesTaxesCalculator.Entities
         {
             return this.Sum(be => be.Quantity * be.Product.PriceWithTaxes);
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach(BasketElement be in this)
+            {
+                sb.AppendLine(be.ToString());
+            }            
+            sb.AppendFormat("Sales Taxes: {0}{1}", this.GetSalesTaxes(), Environment.NewLine);
+            sb.AppendFormat("Total: {0}", this.GetTotal());
+
+            return sb.ToString();
+        }
     }
 }

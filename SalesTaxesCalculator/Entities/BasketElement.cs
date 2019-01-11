@@ -16,5 +16,10 @@ namespace SalesTaxesCalculator.Entities
             this.Quantity = quantity;
             this.Product = product;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1}: {2}", this.Quantity, this.Product.Name, this.Product.PriceWithTaxes);
+        }
     }
 }
